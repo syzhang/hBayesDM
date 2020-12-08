@@ -356,3 +356,5 @@ CRAN-RELEASE
 Python/.idea
 Python/hbayesdm/version.py
 
+# vscode setup
+.vscode/

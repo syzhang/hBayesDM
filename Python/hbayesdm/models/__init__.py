@@ -17,6 +17,7 @@ from ._dd_cs_single import dd_cs_single
 from ._dd_exp import dd_exp
 from ._dd_hyperbolic import dd_hyperbolic
 from ._dd_hyperbolic_single import dd_hyperbolic_single
+from ._generalise_gs import generalise_gs
 from ._gng_m1 import gng_m1
 from ._gng_m2 import gng_m2
 from ._gng_m3 import gng_m3
@@ -66,6 +67,7 @@ __all__ = [
     'dd_exp',
     'dd_hyperbolic',
     'dd_hyperbolic_single',
+    'generalise_gs',
     'gng_m1',
     'gng_m2',
     'gng_m3',

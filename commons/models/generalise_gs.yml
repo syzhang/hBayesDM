@@ -1,0 +1,46 @@
+task_name:
+  code: generalise
+  desc: Generalisation avoidance Task
+  cite:
+model_name:
+  code: gs
+  desc: 6 Parameter Model
+  cite:
+  - 'Norbury, Agnes, Trevor W Robbins, and Ben Seymour. (2018). ‘Value Generalization in Human Avoidance Learning’. Edited by Daeyeol Lee. ELife 7 (May): e34779. https://doi.org/10.7554/eLife.34779.'
+model_type:
+  code:
+  desc: Hierarchical
+notes:
+contributors:
+- name: Suyi Zhang
+  email: suyizhang52@gmail.com
+  link: https://github.com/syzhang
+data_columns:
+  subjID: A unique identifier for each subject in the data-set.
+  cue: Interger value representing the visual cue presented on the given trial, 1-7
+  choice: Integer value representing the avoidance choice on the given trial, 1 - avoided, 0 - not avoided
+  outcome: Floating point value representing the shock/loss outcome on the given
+    trial (-1 or other losses).
+parameters:
+  sigma_a:
+    desc: shock generalisation
+    info: [0, 0.1, 1]
+  sigma_n:
+    desc: no loss generalisation
+    info: [0, 0.1, 1]
+  eta:
+    desc: Pearce Hall dynamic learning arbitration
+    info: [0, 0.1, 1]
+  kappa:
+    desc: Pearce Hall dynamic learning weight
+    info: [0, 0.1, 1]
+  beta:
+    desc: softmax temperature
+    info: [0, 1, 10]
+  bias:
+    desc: softmax bias
+    info: [0, 0.1, 1]
+regressors:
+postpreds:
+- y_pred
+additional_args:

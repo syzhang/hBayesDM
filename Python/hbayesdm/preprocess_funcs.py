@@ -929,3 +929,41 @@ def cgt_preprocess_func(self, raw_data, general_info, additional_args):
 
     # Returned data_dict will directly be passed to pystan
     return data_dict
+
+
+def generalise_preprocess_func(self, raw_data, general_info, additional_args):
+    """preprocess generalise gs data"""
+    # Iterate through grouped_data
+    subj_group = iter(general_info['grouped_data'])
+
+    # Use general_info(s) about raw_data
+    # subjs = general_info['subjs']
+    n_subj = general_info['n_subj']
+    t_subjs = general_info['t_subjs']
+    t_max = general_info['t_max']
+
+    # Initialize (model-specific) data arrays
+    cue = np.full((n_subj, t_max), 0, dtype=int)
+    choice = np.full((n_subj, t_max), -1, dtype=int)
+    outcome = np.full((n_subj, t_max), -1, dtype=float)
+
+    # Write from subj_data to the data arrays
+    for s in range(n_subj):
+        _, subj_data = next(subj_group)
+        t = t_subjs[s]
+        cue[s][:t] = subj_data['cue']
+        choice[s][:t] = subj_data['choice']
+        outcome[s][:t] = -1 * np.abs(subj_data['outcome'])  # Use abs
+
+    # Wrap into a dict for pystan
+    data_dict = {
+        'N': n_subj,
+        'T': t_max,
+        'Tsubj': t_subjs,
+        'cue': cue,
+        'choice': choice,
+        'outcome': outcome,
+    }
+
+    # Returned data_dict will directly be passed to pystan
+    return data_dict
